@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Filters.Controllers
 {
-    [HttpsOnly]
+    [Profile]
     public class HomeController : Controller
     {
         public IActionResult Index()
