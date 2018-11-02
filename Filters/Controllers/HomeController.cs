@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Filters.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Filters.Controllers
 {
-    [RequireHttps]
+    [HttpsOnly]
     public class HomeController : Controller
     {
         public IActionResult Index()
