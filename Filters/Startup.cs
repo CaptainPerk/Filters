@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Filters.Infrastructure;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +10,14 @@ namespace Filters
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddScoped<IFilterDiagnostics, DefaultFilterDiagnostics>();
+            services.AddScoped<TimeFilter>();
+            services.AddScoped<ViewResultDiagnostics>();
+            services.AddScoped<DiagnosticsFilter>();
+            services.AddMvc().AddMvcOptions(options =>
+            {
+                options.Filters.Add(new MessageAttribute("This is the Globally-Scoped Filter"));
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
