@@ -15,6 +15,5 @@ namespace Filters.Controllers
         {
             return View("Message", "This is the SecondAction action on the Home controller");
         }
-
     }
 }
