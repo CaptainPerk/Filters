@@ -10,9 +10,15 @@ namespace Filters
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IFilterDiagnostics, DefaultFilterDiagnostics>();
-            services.AddSingleton<TimeFilter>();
-            services.AddMvc();
+            services.AddScoped<IFilterDiagnostics, DefaultFilterDiagnostics>();
+            services.AddScoped<TimeFilter>();
+            services.AddScoped<ViewResultDiagnostics>();
+            services.AddScoped<DiagnosticsFilter>();
+            services.AddMvc().AddMvcOptions(options =>
+            {
+                options.Filters.AddService(typeof(ViewResultDiagnostics));
+                options.Filters.AddService(typeof(DiagnosticsFilter));
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
