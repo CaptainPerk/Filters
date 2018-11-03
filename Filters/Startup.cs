@@ -10,7 +10,8 @@ namespace Filters
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IFilterDiagnostics, DefaultFilterDiagnostics>();
+            services.AddSingleton<IFilterDiagnostics, DefaultFilterDiagnostics>();
+            services.AddSingleton<TimeFilter>();
             services.AddMvc();
         }
 

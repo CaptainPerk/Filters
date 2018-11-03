@@ -5,7 +5,7 @@ using System;
 namespace Filters.Controllers
 {
     [TypeFilter(typeof(DiagnosticsFilter))]
-    [TypeFilter(typeof(TimeFilter))]
+    [ServiceFilter(typeof(TimeFilter))]
     public class HomeController : Controller
     {
         public IActionResult Index()
