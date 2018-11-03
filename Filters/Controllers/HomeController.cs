@@ -1,10 +1,12 @@
 ﻿using Filters.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Filters.Controllers
 {
     [Profile]
     [ViewResultDetails]
+    [RangeException]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -15,6 +17,15 @@ namespace Filters.Controllers
         public IActionResult SecondAction()
         {
             return View("Message", "This is the SecondAction action on the Home controller");
+        }
+
+        public ViewResult GenerateException(int? id)
+        {
+            if (id == null) throw new ArgumentNullException(nameof(id));
+
+            if (id > 10) throw new ArgumentOutOfRangeException(nameof(id));
+
+            return View("Message", $"The value of id is {id}");
         }
     }
 }
